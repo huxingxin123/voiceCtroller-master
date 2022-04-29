@@ -64,6 +64,8 @@ public class MainActivity extends Activity implements OnClickListener {
     private TextView userId;
     private ImageView inviteWidget;
     private ImageView addFriend;
+    private View fakeInvite;
+    private View fakeAdd;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -100,10 +102,14 @@ public class MainActivity extends Activity implements OnClickListener {
         userId = findViewById(R.id.userName);
         inviteWidget = findViewById(R.id.invite_widget);
         addFriend = findViewById(R.id.add_friend);
+        fakeInvite = findViewById(R.id.accept_invite);
+        fakeAdd = findViewById(R.id.accept_add);
         b_btn.setOnClickListener(this);
         userImg.setOnClickListener(this);
         inviteWidget.setOnClickListener(this);
         addFriend.setOnClickListener(this);
+        fakeInvite.setOnClickListener(this);
+        fakeAdd.setOnClickListener(this);
 
         Intent intent = getIntent();
         String userid = intent.getStringExtra(USER_ID);
@@ -127,6 +133,12 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
             case R.id.add_friend:
                 addFriend();
+                break;
+            case R.id.accept_invite:
+                showOtherAgree();
+                break;
+            case R.id.accept_add:
+                showNotify();
                 break;
             default:
                 break;
@@ -362,11 +374,11 @@ public class MainActivity extends Activity implements OnClickListener {
     private void showNotify(){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("通知")
-                .setMessage("有人邀请你一起录制")
+                .setMessage("【小李】添加你为好友")
                 .setPositiveButton("同意", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        recordTransWord();
+
                     }
                 })
                 .setNegativeButton("了解", null).create().show();
